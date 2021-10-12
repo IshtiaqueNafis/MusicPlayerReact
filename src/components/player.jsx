@@ -27,7 +27,7 @@ const Player = ({currentSong, isPlaying, setIsPlaying},) => {
         duration: null
     })
     //endregion
-
+//region
     const timeUpdateHandler = (e) => {
 
         const current = e.target.currentTime; // displays what length current song is playing
@@ -38,13 +38,22 @@ const Player = ({currentSong, isPlaying, setIsPlaying},) => {
             duration
         })
     };
+
+    const dragHandler = e => {
+        audioRef.current.currentTime = e.target.value; //sets the current audio value. so it updates when the cursor moves.
+        setSongInfo({...songInfo, currentTime: e.target.currentTime});
+    }
+
+    //endregion
     const getTime = (time) => `${Math.floor(time / 60)}:${(`0${Math.floor(time & 60)}`).slice(-2)}`
+
 
     return (
         <div className='player'>
             <div className="time-control">
                 <p>  {getTime(songInfo.currentTime)}</p>
-                <input type="Range"/>
+                <input min={0} max={songInfo.duration} value={songInfo.currentTime} onChange={dragHandler}
+                       type="Range"/>
                 <p>{getTime(songInfo.duration)}</p>
             </div>
             <div className='play-control'>
