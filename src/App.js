@@ -7,12 +7,16 @@ import {useState} from "react";
 const App = () => {
     const [songs, setSongs] = useState(data())
     const [currentSong, setCurrentSong] = useState(songs[0])
+    const [isPlaying, setIsPlaying] = useState(false);
     return (
 
         <div className="App">
             <h1> Music </h1>
             <Song currentSong={currentSong}/>
-            <Player currentSong={currentSong}/>
+            <Player setIsPlaying={setIsPlaying} // this will be whther setisPlaying
+                    isPlaying={isPlaying} // this will be whether isPlaying current song.
+                    currentSong={currentSong} // passes current song
+            />
 
         </div>
     );
