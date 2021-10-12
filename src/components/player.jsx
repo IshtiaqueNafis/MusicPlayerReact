@@ -2,7 +2,7 @@
 
 import React, {useRef, useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faAngleLeft, faAngleRight, faPlay} from "@fortawesome/free-solid-svg-icons";
+import {faAngleLeft, faAngleRight, faPause, faPlay} from "@fortawesome/free-solid-svg-icons";
 
 const Player = ({currentSong, isPlaying, setIsPlaying},) => {
     //region audioRef for playing
@@ -23,8 +23,8 @@ const Player = ({currentSong, isPlaying, setIsPlaying},) => {
 
     //region songInfo --> set the songInfo
     const [songInfo, setSongInfo] = useState({
-        currentTime: null,
-        duration: null
+        currentTime: 0,
+        duration: 0,
     })
     //endregion
 //region
@@ -65,7 +65,7 @@ const Player = ({currentSong, isPlaying, setIsPlaying},) => {
                     onClick={playSongHandler}
                     className='play'
                     size='2x'
-                    icon={faPlay}/>
+                    icon={isPlaying ? faPause : faPlay}/>
                 <FontAwesomeIcon
                     className='skip-forward'
                     size='2x'
