@@ -12,7 +12,7 @@ const App = () => {
         <div className="App">
             <h1> Music </h1>
             <Song currentSong={currentSong}/>
-            <Player/>
+            <Player currentSong={currentSong}/>
 
         </div>
     );

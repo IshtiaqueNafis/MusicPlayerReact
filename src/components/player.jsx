@@ -1,10 +1,17 @@
 //plays pause music
 
-import React from 'react';
+import React,{useRef} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faAngleLeft, faAngleRight, faPlay} from "@fortawesome/free-solid-svg-icons";
 
-const Player = () => {
+const Player = ({currentSong}) => {
+    //ref
+    const audioRef = useRef(null);
+
+    const playSongHandler = () => {
+       console.log(audioRef.current)
+    }
+
     return (
         <div className='player'>
             <div className="time-control">
@@ -18,6 +25,7 @@ const Player = () => {
                         size='2x'
                         icon={faAngleLeft}/>
                     <FontAwesomeIcon
+                        onClick = {playSongHandler}
                         className='play'
                         size='2x'
                         icon={faPlay}/>
@@ -26,7 +34,7 @@ const Player = () => {
                         size='2x'
                         icon={faAngleRight}/>
                 </div>
-
+            <audio ref={audioRef} src={currentSong.audio}/>
         </div>
     );
 };
