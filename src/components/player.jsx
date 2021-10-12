@@ -1,14 +1,10 @@
 //plays pause music
 
-import React, {useRef, useState} from 'react';
+import React from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faAngleLeft, faAngleRight, faPause, faPlay} from "@fortawesome/free-solid-svg-icons";
 
-const Player = ({currentSong, isPlaying, setIsPlaying},) => {
-    //region audioRef for playing
-    const audioRef = useRef(null);
-    //endregion
-
+const Player = ({currentSong, isPlaying, setIsPlaying, audioRef, setSongInfo, songInfo},) => {
     //region playSongHandler
     const playSongHandler = () => {
         if (isPlaying) {
@@ -21,23 +17,6 @@ const Player = ({currentSong, isPlaying, setIsPlaying},) => {
     }
     //endregion
 
-    //region songInfo --> set the songInfo
-    const [songInfo, setSongInfo] = useState({
-        currentTime: 0,
-        duration: 0,
-    })
-    //endregion
-//region
-    const timeUpdateHandler = (e) => {
-
-        const current = e.target.currentTime; // displays what length current song is playing
-        const duration = e.target.duration; // displays how long the song is.
-        setSongInfo({
-            ...songInfo, // copy the current song info
-            currentTime: current,  // set the current time
-            duration
-        })
-    };
 
     const dragHandler = e => {
         audioRef.current.currentTime = e.target.value; //sets the current audio value. so it updates when the cursor moves.
@@ -71,9 +50,7 @@ const Player = ({currentSong, isPlaying, setIsPlaying},) => {
                     size='2x'
                     icon={faAngleRight}/>
             </div>
-            <audio
-                onLoadedMetadata={timeUpdateHandler}
-                onTimeUpdate={timeUpdateHandler} ref={audioRef} src={currentSong.audio}/>
+
         </div>
     );
 };
