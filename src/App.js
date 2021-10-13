@@ -42,6 +42,9 @@ const App = () => {
                 currentSong={currentSong} // passes current song
                 setSongInfo={setSongInfo}
                 songInfo={songInfo}
+                songs={songs}
+                setCurrentSong={setCurrentSong}
+                setSongs={setSongs}
             />
             <Library audioRef={audioRef} songs={songs} setCurrentSong={setCurrentSong} isPlaying={isPlaying}
                      setSongs={setSongs} libraryStatus={libraryStatus}/>
