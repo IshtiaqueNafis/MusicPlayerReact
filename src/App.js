@@ -15,6 +15,7 @@ const App = () => {
     const [songInfo, setSongInfo] = useState({
         currentTime: 0,
         duration: 0,
+        animationPercentage: 0,
     })
     //endregion
     const [libraryStatus, setLibraryStatus] = useState(false);
@@ -23,12 +24,18 @@ const App = () => {
 
         const current = e.target.currentTime; // displays what length current song is playing
         const duration = e.target.duration; // displays how long the song is.
+        const roundedCurrent = Math.round(current)
+        const roundedDuration = Math.round(duration)
+        const animationPercentage = Math.round((roundedCurrent / roundedDuration) * 100)
         setSongInfo({
             ...songInfo, // copy the current song info
             currentTime: current,  // set the current time
-            duration
+            duration,
+            animationPercentage
         })
     };
+
+
     return (
 
         <div className="App">

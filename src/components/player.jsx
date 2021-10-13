@@ -44,7 +44,7 @@ const Player = ({
             }
         })
         setSongs(newSongs)
-    },[currentSong])
+    }, [currentSong])
 
     const SkipTrackHandler = (direction) => {
         let currentIndex = songs.findIndex(song => song.id === currentSong.id)
@@ -54,7 +54,7 @@ const Player = ({
         if (direction === 'skip-back') {
             if ((currentIndex - 1) % songs.length === -1) {
                 setCurrentSong(songs[songs.length - 1])
-                playAudio(isPlaying,audioRef)
+                playAudio(isPlaying, audioRef)
                 return; // returns it so the code does not break;
 
             }
@@ -72,14 +72,23 @@ const Player = ({
     //endregion
     const getTime = (time) => `${Math.floor(time / 60)}:${(`0${Math.floor(time & 60)}`).slice(-2)}`
 
-
+    const trackAnim = {
+        transform: `translateX(${songInfo.animationPercentage}%)`
+    }
     return (
         <div className='player'>
             <div className="time-control">
                 <p>  {getTime(songInfo.currentTime)}</p>
-                <input min={0} max={songInfo.duration || 0} value={songInfo.currentTime} onChange={dragHandler}
-                       type="Range"/>
-                <p>{songInfo.duration?  getTime(songInfo.duration):"0:00"}</p>
+                <div style={{background: `linear-gradient(to right,${currentSong.color[0]},${currentSong.color[1]}`}}
+                     className="track">
+                    <input min={0} max={songInfo.duration || 0} value={songInfo.currentTime} onChange={dragHandler}
+                           type="Range"/>
+                    <div style={trackAnim} className="animate-track">
+
+                    </div>
+                </div>
+
+                <p>{songInfo.duration ? getTime(songInfo.duration) : "0:00"}</p>
             </div>
             <div className='play-control'>
                 <FontAwesomeIcon
