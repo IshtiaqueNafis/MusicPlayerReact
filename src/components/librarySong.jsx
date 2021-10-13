@@ -2,10 +2,10 @@ import React from 'react';
 import {playAudio} from "../utlis/utlis";
 
 const LibrarySong = ({song, songs, setCurrentSong, id, audioRef, isPlaying, setSongs}) => {
-    const songSelectHandler = () => {
+    const songSelectHandler = async () => {
         const selectedSong = songs.filter(state => state.id === id)
 
-        setCurrentSong(selectedSong[0]); // returns 0 so used selected Song.
+     await   setCurrentSong(selectedSong[0]); // returns 0 so used selected Song.
 
         //addactive State
         const newSongs = songs.map((song) => {
@@ -22,7 +22,7 @@ const LibrarySong = ({song, songs, setCurrentSong, id, audioRef, isPlaying, setS
             }
         })
         setSongs(newSongs)
-        playAudio(isPlaying, audioRef)
+        if(isPlaying) audioRef.current.play();
         //
 
 
